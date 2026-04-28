@@ -35,3 +35,29 @@ def fetch_news(topic="technology", count=10):
     else:
         print(f"Error: {response.status_code} - {response.json()}")
         return []
+    
+def setup_database():
+    """Create the database and articles table if it doesn't exist"""
+ 
+    # This creates a file called news.db in your data/ folder
+    conn = sqlite3.connect("data/news.db")
+    cursor = conn.cursor()
+ 
+    # Create table to store articles
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS articles (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT,
+            description TEXT,
+            source TEXT,
+            author TEXT,
+            url TEXT UNIQUE,
+            published_at TEXT,
+            topic TEXT,
+            saved_at TEXT
+        )
+    """)
+ 
+    conn.commit()
+    conn.close()
+    print("✅ Database ready!")
