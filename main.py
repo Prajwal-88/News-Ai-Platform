@@ -61,7 +61,7 @@ def setup_database():
  
     conn.commit()
     conn.close()
-    print("✅ Database ready!")
+    print(" Database ready!")
 
 def save_articles(articles, topic):
     """Save fetched articles into SQLite database"""
